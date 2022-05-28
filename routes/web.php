@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\EstudanteController;
+use App\Http\Controllers\InstituicaoController;
+use App\Http\Controllers\ProfessorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [Controller::class, 'test']);
+Route::get('/', [Controller::class, 'test'])->name('home');
+
+Route::resources([
+    'estudante' => EstudanteController::class,
+    'professor' => ProfessorController::class,
+    'instituicao' => InstituicaoController::class,
+]);

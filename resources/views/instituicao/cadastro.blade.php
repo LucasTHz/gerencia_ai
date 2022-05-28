@@ -5,13 +5,18 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro de estudante</title>
+    <title>Cadastro de instituicao</title>
 </head>
 <body>
 @include('layouts.navbar')
-<form class="row g-3" method="POST" action="{{route('estudante.store')}}">
+<form class="row g-3" method="POST" action="{{route('instituicao.store')}}">
     @csrf
-    <div class="col-md-6">
+    <div class="col-md-3">
+        <label for="inputEmail4" class="form-label">Nome</label>
+        <input type="text" name="nome" class="form-control" id="inputEmail4">
+    </div>
+
+    <div class="col-md-3">
         <label for="inputEmail4" class="form-label">Email</label>
         <input type="email" name="email" class="form-control" id="inputEmail4">
     </div>
@@ -20,26 +25,22 @@
         <input type="password" name="password" class="form-control" id="inputPassword4">
     </div>
     <div class="col-12">
-        <label for="inputAddress" class="form-label">Address</label>
+        <label for="inputAddress" class="form-label">Rua</label>
         <input type="text" name="name" class="form-control" id="inputAddress" placeholder="1234 Main St">
     </div>
-    <div class="col-12">
-        <label for="inputAddress2" class="form-label">Address 2</label>
-        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-    </div>
     <div class="col-md-6">
-        <label for="inputCity" class="form-label">City</label>
+        <label for="inputCity" class="form-label">Cidade</label>
         <input type="text" class="form-control" id="inputCity">
     </div>
     <div class="col-md-4">
-        <label for="inputState" class="form-label">State</label>
+        <label for="inputState" class="form-label">Estado</label>
         <select id="inputState" class="form-select">
             <option selected>Choose...</option>
             <option>...</option>
         </select>
     </div>
     <div class="col-md-2">
-        <label for="inputZip" class="form-label">Zip</label>
+        <label for="inputZip" class="form-label">Cep</label>
         <input type="text" class="form-control" id="inputZip">
     </div>
     <div class="col-12">

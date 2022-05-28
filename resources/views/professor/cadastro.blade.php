@@ -5,11 +5,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro de estudante</title>
+    <title>Cadastro de professor</title>
 </head>
 <body>
 @include('layouts.navbar')
-<form class="row g-3" method="POST" action="{{route('estudante.store')}}">
+<form class="row g-3" method="POST" action="{{route('professor.store')}}">
     @csrf
     <div class="col-md-6">
         <label for="inputEmail4" class="form-label">Email</label>
