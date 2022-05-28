@@ -13,8 +13,6 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     function test() {
-        $editais = Edital::all();
 
-        return view('welcome', ['editais' => $editais]);
     }
 }

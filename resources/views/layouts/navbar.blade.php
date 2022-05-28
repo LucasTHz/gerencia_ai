@@ -27,7 +27,7 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Editais</a>
+                    <a class="nav-link" href="{{route('edital.index')}}">Editais</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Login</a>
