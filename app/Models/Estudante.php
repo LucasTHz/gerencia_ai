@@ -14,14 +14,28 @@ class Estudante extends Model
     protected $table = 'Estudante';
     protected $primaryKey = 'id';
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
+        'telefone_celular',
+        'telefone_fixo',
+        'data_nascimento',
+        'cpf',
+        'rua',
+        'numero',
+        'bairro',
+        'complemento',
+        'telefone_responsavel',
+        'nome_responsavel',
         'nome',
         'email',
+        'senha',
+        'id_instituicao',
     ];
 
 

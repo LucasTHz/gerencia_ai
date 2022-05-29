@@ -13,6 +13,7 @@ class Instituicoes extends Model
 
     protected $table = 'Instituicao';
     protected $primaryKey = 'id_instituicao';
+    public $timestamps = false;
     protected $attributes = [
         'nome',
         'sigla',

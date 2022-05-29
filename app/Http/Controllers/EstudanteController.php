@@ -35,9 +35,14 @@ class EstudanteController extends Controller
      */
     public function store(Request $request)
     {
-        $estudante = Estudante::create([
 
+        $estudante = Estudante::create([
+            'nome' => $request->nome,
+            'email'=> $request->email,
+            'id_instituicao' => 1
         ]);
+
+        dd($estudante);
     }
 
     /**
