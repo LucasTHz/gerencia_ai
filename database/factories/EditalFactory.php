@@ -6,7 +6,7 @@ use App\Models\Edital;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Editais>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Edital>
  */
 class EditalFactory extends Factory
 {

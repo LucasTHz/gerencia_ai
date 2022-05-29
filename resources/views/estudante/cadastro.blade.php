@@ -1,27 +1,21 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro de estudante</title>
-</head>
-<body>
-@include('layouts.navbar')
+@extends('layouts.navbar')
+@section('title', 'Cadastro de estudante')
+
+@section('content')
+<h1>Cadastro de estudante</h1>
 <form class="row g-3" method="POST" action="{{route('estudante.store')}}">
     @csrf
     <div class="col-md-6">
-        <label for="inputEmail4" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" id="inputEmail4">
+        <label for="inputNome" class="form-label">Nome</label>
+        <input type="text" name="nome" class="form-control" id="inputNome">
     </div>
     <div class="col-md-6">
         <label for="inputPassword4" class="form-label">Password</label>
         <input type="password" name="password" class="form-control" id="inputPassword4">
     </div>
     <div class="col-12">
-        <label for="inputAddress" class="form-label">Address</label>
-        <input type="text" name="name" class="form-control" id="inputAddress" placeholder="1234 Main St">
+        <label for="inputAddress" class="form-label">nome</label>
+        <input type="text" name="nome" class="form-control" id="inputAddress" placeholder="1234 Main St">
     </div>
     <div class="col-12">
         <label for="inputAddress2" class="form-label">Address 2</label>
@@ -54,5 +48,4 @@
         <button type="submit" class="btn btn-primary">Sign in</button>
     </div>
 </form>
-</body>
-</html>
+@endsection
