@@ -14,8 +14,6 @@ class Estudante extends Model
     protected $table = 'Estudante';
     protected $primaryKey = 'id';
 
-    public $timestamps = false;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -28,6 +26,8 @@ class Estudante extends Model
         'cpf',
         'rua',
         'numero',
+        'cidade',
+        'estado',
         'bairro',
         'complemento',
         'telefone_responsavel',

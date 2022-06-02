@@ -2,6 +2,13 @@
 @section('title', 'Home | Gerencia ai')
 
 @section('content')
+    <div class="container-fluid">
+        <div class="row">
+            @if (session('msg'))
+                <p class="msg">{{ session('msg') }}</p>
+            @endif
+            @yield('content')
+        </div>
     <h1 class="mt-8 text-center mb-4">Notícias</h1>
 
     <div class="row row-cols-1 row-cols-md-3 g-2 ml-2">

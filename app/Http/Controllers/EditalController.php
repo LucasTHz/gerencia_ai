@@ -13,9 +13,8 @@ class EditalController extends Controller
      * @return \Illuminate\Contracts\View\View
      */
     public function index()
-    {
+    {        
         return view('edital.index', ['editais' => Edital::paginate(6)]);
-
     }
 
     /**

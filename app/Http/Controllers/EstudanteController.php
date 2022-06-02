@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEstudanteRequest;
+use App\Models\Edital;
 use App\Models\Estudante;
+use App\Models\Instituicoes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EstudanteController extends Controller
 {
@@ -24,25 +28,30 @@ class EstudanteController extends Controller
      */
     public function create()
     {
-        return view('estudante.cadastro');
+        return view('estudante.cadastro', [
+            'instituicoes' => Instituicoes::get('nome')
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(StoreEstudanteRequest $request)
     {
+            $id_instituicao = DB::table('Instituicao')
+                ->where('nome', '=', $request->instituicao)
+                ->get('id_instituicao');
 
-        $estudante = Estudante::create([
-            'nome' => $request->nome,
-            'email'=> $request->email,
-            'id_instituicao' => 1
-        ]);
+        $estudante = Estudante::create(array_merge($request->only(
+            'nome', 'email', 'senha', 'telefone_celular', 'cpf', 'id_instituicao', 'rua', 'bairro',
+            'numero', 'estado', 'cidade', 'responsavel', 'complemento', 'data_nascimento'), [
+                'id_instituicao' => $id_instituicao[0]->id_instituicao
+        ]));
 
-        dd($estudante);
+        return redirect('/')->with('msg', 'Estudante cadastrado com sucesso!');
     }
 
     /**
