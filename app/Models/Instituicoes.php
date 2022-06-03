@@ -23,4 +23,12 @@ class Instituicoes extends Model
         'nome',
         'sigla',
     ];
+
+    /**
+     * The professores that belong to the instituicao.
+     */
+    public function professores()
+    {
+        return $this->belongsToMany(Professores::class);
+    }
 }

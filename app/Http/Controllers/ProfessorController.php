@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProfessorRequest;
+use App\Models\Instituicoes;
+use Illuminate\Support\Facades\DB;
 use App\Models\Professores;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,8 @@ class ProfessorController extends Controller
      */
     public function index()
     {
-        //
+        $professores = Professores::all();
+        dd($professores->instituicao());
     }
 
     /**
@@ -25,7 +28,7 @@ class ProfessorController extends Controller
      */
     public function create()
     {
-        return view('professor.cadastro');
+        return view('professor.cadastro', ['instituicoes' => Instituicoes::all()]);
     }
 
     /**
@@ -34,12 +37,18 @@ class ProfessorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProfessorRequest $request)
+    public function store(Request $request)
     {
-        Professores::create(array_merge(
+        $professor = Professores::create(array_merge(
             $request->only('nome', 'email', 'password', 'celular', 'cpf', 'matricula', 'endereco_curriculo'),
             ['password' => bcrypt($request->password)]
         ));
+
+        
+        $intituicao = DB::table('Instituicao')->select('id_instituicao')->where('nome', '=' ,$request->instituicao)->get();
+
+        $professor->instituicoes()->attach($intituicao[0]);
+
         $request->session()->regenerate();
         return redirect('/')->with('msg', 'Professor cadastrado com sucesso!');
     }

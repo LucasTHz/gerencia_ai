@@ -29,4 +29,12 @@ class Professores extends Authenticatable
         'matricula',
         'celular',
     ];
+
+    /**
+     * Get the instituição that owns the professor.
+     */
+    public function instituicoes()
+    {
+        return $this->belongsToMany(Instituicoes::class, 'Trabalha', 'id_professor', 'id_instituicao');
+    }
 }
