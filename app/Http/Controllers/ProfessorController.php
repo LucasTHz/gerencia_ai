@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProfessorRequest;
 use App\Models\Professores;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,14 @@ class ProfessorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProfessorRequest $request)
     {
-        //
+        Professores::create(array_merge(
+            $request->only('nome', 'email', 'password', 'celular', 'cpf', 'matricula', 'endereco_curriculo'),
+            ['password' => bcrypt($request->password)]
+        ));
+        $request->session()->regenerate();
+        return redirect('/')->with('msg', 'Professor cadastrado com sucesso!');
     }
 
     /**

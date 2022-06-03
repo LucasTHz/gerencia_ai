@@ -53,7 +53,7 @@ class EstudanteController extends Controller
             ->where('nome', '=', $request->instituicao)
             ->get('id_instituicao');
 
-        $estudante = Estudante::create(array_merge($request->only(
+        Estudante::create(array_merge($request->only(
             'nome',
             'email',
             'id_instituicao',
@@ -71,6 +71,7 @@ class EstudanteController extends Controller
             'cpf' => $cpf,
             'senha' => bcrypt($request->senha)
         ]));
+        $request->session()->regenerate();
 
         return redirect('/')->with('msg', 'Estudante cadastrado com sucesso!');
     }

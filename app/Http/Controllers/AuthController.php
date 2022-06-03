@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (auth('estudante')->attempt($credentials)) {
+        if (auth('estudante')->attempt($credentials) || auth('professor')->attempt($credentials)) {
             $request->session()->regenerate();
 
             return to_route('home')->with(

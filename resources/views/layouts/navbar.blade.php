@@ -420,8 +420,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('edital.index')}}">Editais</a>
                         </li>
-                        
-                        @auth('estudante', 'professor')
+
+                        @auth('estudante')
                         <li class="nav-item">
                             <a class="nav-link" href="#">Perfil</a>
                         </li>
@@ -433,28 +433,41 @@
                         </form>
                         @endauth
 
-                        @guest('estudante', 'professor')
+                        @auth('professor')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('auth.login')}}">Login</a>
+                            <a class="nav-link" href="#">Cadastrar edital</a>
                         </li>
-                        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                            <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Cadastre-se
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-dark"
-                                        aria-labelledby="navbarDarkDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="{{route('estudante.create')}}">Estudante</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="{{route('professor.create')}}">Professor</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        @endguest
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Perfil</a>
+                        </li>
+                        <form action="{{route('auth.logout')}}" name="logout" method="post">
+                            @csrf
+                            <li class="nav-item">
+                                <a class="nav-link" href='javascript:logout.submit()'>Logout</a>
+                            </li>
+                        </form>
+                        @endauth
+                        @unless (auth('estudante')->check() || auth('professor')->check())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('auth.login')}}">Login</a>
+                            </li>
+                            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Cadastre-se
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                            <li><a class="dropdown-item" href="{{route('estudante.create')}}">Estudante</a>
+                                            </li>
+                                            <li><a class="dropdown-item" href="{{route('professor.create')}}">Professor</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        @endunless
                     </ul>
                 </div>
             </div>
