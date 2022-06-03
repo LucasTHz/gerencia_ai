@@ -37,16 +37,19 @@ class ProfessorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProfessorRequest $request)
     {
+        // Valida os dados do formulario e cria um novo professor.
+
         $professor = Professores::create(array_merge(
             $request->only('nome', 'email', 'password', 'celular', 'cpf', 'matricula', 'endereco_curriculo'),
             ['password' => bcrypt($request->password)]
         ));
 
-        
-        $intituicao = DB::table('Instituicao')->select('id_instituicao')->where('nome', '=' ,$request->instituicao)->get();
+        // pegou o id da instituicao que foi passada no formulario
+        $intituicao = DB::table('Instituicao')->select('id_instituicao')->where('nome', '=', $request->instituicao)->get();
 
+        // Salva a relacao entre o professor e a instituicao na tabela Trabalha
         $professor->instituicoes()->attach($intituicao[0]);
 
         $request->session()->regenerate();
