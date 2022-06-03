@@ -33,6 +33,11 @@ class EstudanteController extends Controller
         ]);
     }
 
+    public function login()
+    {
+        return view('estudante.login');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -41,14 +46,30 @@ class EstudanteController extends Controller
      */
     public function store(StoreEstudanteRequest $request)
     {
-            $id_instituicao = DB::table('Instituicao')
-                ->where('nome', '=', $request->instituicao)
-                ->get('id_instituicao');
+        $celular = preg_replace('/[^0-9]/', '', $request->telefone_celular);
+        $cpf = preg_replace('/[^0-9]/', '', $request->cpf);
+
+        $id_instituicao = DB::table('Instituicao')
+            ->where('nome', '=', $request->instituicao)
+            ->get('id_instituicao');
 
         $estudante = Estudante::create(array_merge($request->only(
-            'nome', 'email', 'senha', 'telefone_celular', 'cpf', 'id_instituicao', 'rua', 'bairro',
-            'numero', 'estado', 'cidade', 'responsavel', 'complemento', 'data_nascimento'), [
-                'id_instituicao' => $id_instituicao[0]->id_instituicao
+            'nome',
+            'email',
+            'id_instituicao',
+            'rua',
+            'bairro',
+            'numero',
+            'estado',
+            'cidade',
+            'responsavel',
+            'complemento',
+            'data_nascimento'
+        ), [
+            'id_instituicao' => $id_instituicao[0]->id_instituicao,
+            'telefone_celular' => $celular,
+            'cpf' => $cpf,
+            'senha' => bcrypt($request->senha)
         ]));
 
         return redirect('/')->with('msg', 'Estudante cadastrado com sucesso!');

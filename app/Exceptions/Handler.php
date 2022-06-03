@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\UnauthorizedException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,5 +49,32 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if ($e instanceof QueryException) {
+            return redirect()->back()->withErrors([
+                'error' => 'Erro de banco de dados.'
+            ]);
+        }
+
+        // caso alguém não autorizado tente acessar rotas das quais não possui permissão.
+        if ($e instanceof UnauthorizedException) {
+            return response([
+                'msg' => 'Você não tem autorização!',
+            ], 403);
+        }
+
+        // caso sejá requesitado um ID que não se encontra no banco.
+        if ($e instanceof ModelNotFoundException) {
+            return response([
+                "msg" => "Recurso não encontrado"
+            ], 404);
+        }
+        dd($e->getMessage());
+        return redirect()->back()->withErrors([
+            'error' => 'Erro interno.'
+        ]);
     }
 }

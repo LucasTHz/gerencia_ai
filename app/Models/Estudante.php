@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Estudante extends Model
+class Estudante extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -34,7 +35,7 @@ class Estudante extends Model
         'nome_responsavel',
         'nome',
         'email',
-        'senha',
+        'password',
         'id_instituicao',
     ];
 
