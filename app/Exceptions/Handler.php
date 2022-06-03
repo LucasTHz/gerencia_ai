@@ -47,34 +47,39 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+            if ($e instanceof QueryException) {
+                return redirect()->back()->withErrors([
+                    'error' => 'Erro de banco de dados.'
+                ]);
+            }
+
+            // caso alguém não autorizado tente acessar rotas das quais não possui permissão.
+            if ($e instanceof UnauthorizedException) {
+                return response([
+                    'msg' => 'Você não tem autorização!',
+                ], 403);
+            }
+
+            // caso sejá requesitado um ID que não se encontra no banco.
+            if ($e instanceof ModelNotFoundException) {
+                return response([
+                    "msg" => "Recurso não encontrado"
+                ], 404);
+            }
+
         });
     }
 
+    /**
+     * Report or log an exception.
+     *
+     * @param  \Throwable  $exception
+     * @return void
+     *
+     * @throws \Exception
+     */
     public function render($request, Throwable $e)
     {
-        if ($e instanceof QueryException) {
-            return redirect()->back()->withErrors([
-                'error' => 'Erro de banco de dados.'
-            ]);
-        }
-
-        // caso alguém não autorizado tente acessar rotas das quais não possui permissão.
-        if ($e instanceof UnauthorizedException) {
-            return response([
-                'msg' => 'Você não tem autorização!',
-            ], 403);
-        }
-
-        // caso sejá requesitado um ID que não se encontra no banco.
-        if ($e instanceof ModelNotFoundException) {
-            return response([
-                "msg" => "Recurso não encontrado"
-            ], 404);
-        }
-        dd($e->getMessage());
-        return redirect()->back()->withErrors([
-            'error' => 'Erro interno.'
-        ]);
+        // dd($e->getMessage());
     }
 }
