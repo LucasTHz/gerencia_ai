@@ -66,7 +66,6 @@ class Handler extends ExceptionHandler
                     "msg" => "Recurso não encontrado"
                 ], 404);
             }
-
         });
     }
 
@@ -78,8 +77,8 @@ class Handler extends ExceptionHandler
      *
      * @throws \Exception
      */
-    public function render($request, Throwable $e)
-    {
-        dd($e->getMessage());
-    }
+    // public function render($request, Throwable $e)
+    // {
+    //     // dd($e->getMessage());
+    // }
 }

@@ -32,6 +32,7 @@ class StoreProfessorRequest extends FormRequest
             'cpf' => 'required|unique:Professor,cpf|cpf',
             'matricula' => 'required|unique:Professor,matricula',
             'endereco_curriculo' => 'max:255',
+            'instituicao' => 'required',
         ];
     }
 
@@ -58,6 +59,7 @@ class StoreProfessorRequest extends FormRequest
             'matricula.required' => 'Numero de matricula é obrigatorio',
             'matricula.unique' => 'Numero de matricula ja cadastrada',
             'endereco_curriculo.max' => 'Endereço do curriculo muito grande',
+            'instituicao.required' => 'Instituicao é obrigatoria',
         ];
     }
 }
