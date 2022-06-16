@@ -27,6 +27,7 @@ class AuthController extends Controller
     }
     /**
      * Return view for the login page.
+     * @return \Illuminate\Http\Response
      */
     public function login()
     {
@@ -35,6 +36,7 @@ class AuthController extends Controller
 
     /**
      * Logout a user and redirect to the home page.
+     * @param Request $request
      */
     public function logout(Request $request)
     {
