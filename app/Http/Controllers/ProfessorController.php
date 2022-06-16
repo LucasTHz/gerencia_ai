@@ -124,7 +124,7 @@ class ProfessorController extends Controller
 
 
         $request->validate([
-            'atual_password' => [new VerificaSenha, 'required'],
+            'atual_password' => [new VerificaSenha('professor'), 'required'],
             'nova_senha' => ['min:8','max:16', 'required'],
             'conf_senha' => ['same:nova_senha', 'required'],
         ], [

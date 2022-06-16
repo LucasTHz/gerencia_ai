@@ -37,7 +37,15 @@ class Estudante extends Authenticatable
         'email',
         'password',
         'id_instituicao',
+        'matricula',
     ];
 
+    /**
+     * Get the instituição that owns the estudante.
+     */
+    public function instituicoes()
+    {
+        return $this->hasOne(Instituicoes::class, 'id_instituicao', 'id_instituicao');
+    }
 
 }
