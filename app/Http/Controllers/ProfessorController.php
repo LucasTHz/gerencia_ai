@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProfessorRequest;
+use App\Http\Requests\UpdateProfessorRequest;
 use App\Models\Instituicoes;
 use Illuminate\Support\Facades\DB;
 use App\Models\Professores;
+use App\Rules\VerificaSenha;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class ProfessorController extends Controller
 {
@@ -64,7 +67,14 @@ class ProfessorController extends Controller
      */
     public function show(Professores $professores)
     {
-        //
+        $user = auth('professor')->user();
+        $trabalha = DB::table('Instituicao')
+        ->join('Trabalha', 'Instituicao.id_instituicao', '=', 'Trabalha.id_instituicao')
+        ->select('Instituicao.nome')
+        ->where('Trabalha.id_professor', '=', $user->id_professor)
+        ->get();
+
+        return view('professor.show', ['user' => $user, 'trabalha' => $trabalha, 'instituicoes' => Instituicoes::all()]);
     }
 
     /**
@@ -85,9 +95,13 @@ class ProfessorController extends Controller
      * @param  \App\Models\Professores  $professores
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Professores $professores)
+    public function update(UpdateProfessorRequest $request, Professores $professor)
     {
-        //
+        // Valida os dados do formulario e cria um novo professor.
+        $professor->update($request->validated());
+
+        $request->session()->regenerate();
+        return back()->with('msg', 'Dados atualizados com sucesso!');
     }
 
     /**
@@ -99,5 +113,33 @@ class ProfessorController extends Controller
     public function destroy(Professores $professores)
     {
         //
+    }
+
+    /**
+     * Change the password of the Professor.
+     */
+    public function changePassword(Request $request)
+    {
+        $user = auth('professor')->user();
+
+
+        $request->validate([
+            'atual_password' => [new VerificaSenha, 'required'],
+            'nova_senha' => ['min:8','max:16', 'required'],
+            'conf_senha' => ['same:nova_senha', 'required'],
+        ], [
+            'atual_password.required' => 'A senha eh obrigatorio',
+            'nova_senha.required' => 'A nova senha eh obrigatoria',
+            'nova_senha.min' => 'Senha curta demais. Minimo de 6 caracteres',
+            'nova_senha.max' => 'Senha curta demais. Maximo de carcatere 16',
+            'conf_senha.required' => 'Confirmacao da senha obrigatoria',
+            'conf_senha.same' => 'As senhas nao se conferem',
+        ]);
+
+        $professor = Professores::find($user->id_professor);
+        $professor->update(['password' => bcrypt($request->nova_senha)]);
+        $request->session()->regenerate();
+
+        return back()->with('msg', 'Senha atualizada com sucesso!');
     }
 }
