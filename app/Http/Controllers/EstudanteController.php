@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEstudanteRequest;
+use App\Http\Requests\UpdateEstudanteRequest;
 use App\Models\Edital;
 use App\Models\Estudante;
 use App\Models\Instituicoes;
+use App\Rules\VerificaSenha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -64,12 +66,13 @@ class EstudanteController extends Controller
             'cidade',
             'responsavel',
             'complemento',
-            'data_nascimento'
+            'data_nascimento',
+            'matricula',
         ), [
             'id_instituicao' => $id_instituicao[0]->id_instituicao,
             'telefone_celular' => $celular,
             'cpf' => $cpf,
-            'senha' => bcrypt($request->senha)
+            'password' => bcrypt($request->password)
         ]));
         $request->session()->regenerate();
 
@@ -84,7 +87,14 @@ class EstudanteController extends Controller
      */
     public function show(Estudante $estudante)
     {
-        //
+        $instituicao = $estudante->instituicoes()->get('nome');
+        $instituicao = $instituicao[0]['nome'];
+        $user = auth('estudante')->user();
+        return view('estudante.show', [
+            'estudante' => $estudante,
+            'user' => $user,
+            'instituicao' => $instituicao
+        ]);
     }
 
     /**
@@ -95,7 +105,7 @@ class EstudanteController extends Controller
      */
     public function edit(Estudante $estudante)
     {
-        //
+        // return view('estudante.show');
     }
 
     /**
@@ -105,9 +115,13 @@ class EstudanteController extends Controller
      * @param  \App\Models\Estudante  $estudante
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Estudante $estudante)
+    public function update(UpdateEstudanteRequest $request, Estudante $estudante)
     {
-        //
+        // Valida os dados do formulario e cria um novo professor.
+        $estudante->update($request->validated());
+
+        $request->session()->regenerate();
+        return back()->with('msg', 'Dados atualizados com sucesso!');
     }
 
     /**
@@ -119,5 +133,33 @@ class EstudanteController extends Controller
     public function destroy(Estudante $estudante)
     {
         //
+    }
+
+    /**
+     * Change the password of the Estudante.
+     */
+    public function changePassword(Request $request)
+    {
+        $user = auth('estudante')->user();
+
+
+        $request->validate([
+            'atual_password' => [new VerificaSenha('estudante'), 'required'],
+            'nova_senha' => ['min:8', 'max:16', 'required'],
+            'conf_senha' => ['same:nova_senha', 'required'],
+        ], [
+            'atual_password.required' => 'A senha eh obrigatorio',
+            'nova_senha.required' => 'A nova senha eh obrigatoria',
+            'nova_senha.min' => 'Senha curta demais. Minimo de 6 caracteres',
+            'nova_senha.max' => 'Senha curta demais. Maximo de carcatere 16',
+            'conf_senha.required' => 'Confirmacao da senha obrigatoria',
+            'conf_senha.same' => 'As senhas nao se conferem',
+        ]);
+
+        $professor = Estudante::find($user->id_professor);
+        $professor->update(['password' => bcrypt($request->nova_senha)]);
+        $request->session()->regenerate();
+
+        return back()->with('msg', 'Senha atualizada com sucesso!');
     }
 }
