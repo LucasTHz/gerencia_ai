@@ -434,7 +434,7 @@
 
                         @auth('professor')
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Cadastrar edital</a>
+                            <a class="nav-link" href="{{ route('edital.create') }}">Cadastrar edital</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('professor.show', auth('professor')->user()->id_professor)}}">Perfil</a>

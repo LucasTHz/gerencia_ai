@@ -20,10 +20,12 @@ class Edital extends Model
         'vagas_disponiveis_voluntario',
         'numero_edital',
         'resumo',
-        'orgao_fomento',
+        'orgao_fumento_responsavel',
         'inicio_inscricao',
         'termino_inscricao',
         'titulo_proposta',
-        'modelo',
+        'modelo_proposta',
+        'path_edital',
+        'id_instituicao'
     ];
 }
