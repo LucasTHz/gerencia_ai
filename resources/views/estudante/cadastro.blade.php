@@ -76,6 +76,17 @@
         @enderror
     </div>
     </div>
+    <div class="col-md-4">
+        <label for="inputDate" class="form-label">Data de nascimento</label>
+        <input type="date" class="form-control @error('data_nascimento') is-invalid @enderror" name="data_nascimento"
+            id="inputDate">
+        @error('data_nascimento')
+        <div class="invalid-feedback">
+            {{$message}}
+        </div>
+        @enderror
+    </div>
+    </div>
     <div class="col-md-3">
         <label for="inputInstituicao" class="form-label">Instituicao de ensino</label>
         <select class="form-select @error('instituicao') is-invalid @enderror" id="inputInstituicao" name="instituicao">

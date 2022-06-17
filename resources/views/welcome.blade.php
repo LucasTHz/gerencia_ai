@@ -2,14 +2,13 @@
 @section('title', 'Home | Gerencia ai')
 
 @section('content')
-<div id="liveAlertPlaceholder">
-    <div class="row">
-        @if (session('msg'))
-        <p class="msg">{{ session('msg') }}</p>
-        @endif
-        @yield('content')
-    </div>
+
+@if (session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
+@endif
 
 @auth('estudante')
     <div class="row">

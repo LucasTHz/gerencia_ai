@@ -76,7 +76,7 @@ class EstudanteController extends Controller
         ]));
         $request->session()->regenerate();
 
-        return redirect('/')->with('msg', 'Estudante cadastrado com sucesso!');
+        return redirect('/')->with('success', 'Estudante cadastrado com sucesso!');
     }
 
     /**
@@ -121,7 +121,7 @@ class EstudanteController extends Controller
         $estudante->update($request->validated());
 
         $request->session()->regenerate();
-        return back()->with('msg', 'Dados atualizados com sucesso!');
+        return back()->with('success', 'Dados atualizados com sucesso!');
     }
 
     /**
@@ -132,7 +132,8 @@ class EstudanteController extends Controller
      */
     public function destroy(Estudante $estudante)
     {
-        //
+        $estudante->delete();
+        return to_route('home')->with('destroy', 'Conta excluída com sucesso!');
     }
 
     /**
@@ -160,6 +161,6 @@ class EstudanteController extends Controller
         $professor->update(['password' => bcrypt($request->nova_senha)]);
         $request->session()->regenerate();
 
-        return back()->with('msg', 'Senha atualizada com sucesso!');
+        return back()->with('success', 'Senha atualizada com sucesso!');
     }
 }

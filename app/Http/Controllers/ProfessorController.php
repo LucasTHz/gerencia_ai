@@ -56,7 +56,7 @@ class ProfessorController extends Controller
         $professor->instituicoes()->attach($intituicao[0]);
 
         $request->session()->regenerate();
-        return redirect('/')->with('msg', 'Professor cadastrado com sucesso!');
+        return redirect('/')->with('success', 'Professor cadastrado com sucesso!');
     }
 
     /**
@@ -101,7 +101,7 @@ class ProfessorController extends Controller
         $professor->update($request->validated());
 
         $request->session()->regenerate();
-        return back()->with('msg', 'Dados atualizados com sucesso!');
+        return back()->with('success', 'Dados atualizados com sucesso!');
     }
 
     /**
@@ -140,6 +140,6 @@ class ProfessorController extends Controller
         $professor->update(['password' => bcrypt($request->nova_senha)]);
         $request->session()->regenerate();
 
-        return back()->with('msg', 'Senha atualizada com sucesso!');
+        return back()->with('success', 'Senha atualizada com sucesso!');
     }
 }

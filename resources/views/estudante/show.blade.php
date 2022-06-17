@@ -2,14 +2,16 @@
 @section('title', 'Perfil | Gerencia ai')
 
 @section('content')
-<div id="liveAlertPlaceholder">
-  <div class="row">
-    @if (session('msg'))
-    <p class="msg">{{ session('msg') }}</p>
-    @endif
-    @yield('content')
-  </div>
+
+@if (session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ session('success') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
+@endif
+@yield('content')
+
+
 <h1>Dados pessoais</h1>
 <form class="row g-3" method="POST" action="{{route('estudante.update', auth('estudante')->user()->id)}}">
   @csrf
@@ -172,6 +174,35 @@
   </div>
   <div class="col-12">
     <button type="submit" class="btn btn-primary">Alterar senha</button>
+  </div>
+</form>
+
+<!-- Button trigger modal -->
+<button class="link-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Encerrar conta
+</button>
+
+<!-- Modal -->
+<form action="{{route('estudante.destroy', auth('estudante')->user()->id)}}" method="POST">
+  @csrf
+  @method('DELETE')
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Encerramento de conta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Essa acao eh inrreversível, deseja continuar?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-danger">Continuar</button>
+        </div>
+      </div>
+    </div>
   </div>
 </form>
 @endsection

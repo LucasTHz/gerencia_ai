@@ -4,8 +4,8 @@
 @section('content')
 <div id="liveAlertPlaceholder">
   <div class="row">
-    @if (session('msg'))
-    <p class="msg">{{ session('msg') }}</p>
+    @if (session('success'))
+    <p class="success">{{ session('success') }}</p>
     @endif
     @yield('content')
   </div>

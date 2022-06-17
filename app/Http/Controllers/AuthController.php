@@ -17,7 +17,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             return to_route('home')->with(
-                'msg', 'Login realizado com sucesso!'
+                'success', 'Login realizado com sucesso!'
             );
         }
         
@@ -47,7 +47,7 @@ class AuthController extends Controller
         // $request->session()->regenerateToken();
 
         return to_route('home')->with(
-            'msg', 'Logout realizado com sucesso!'
+            'success', 'Logout realizado com sucesso!'
         );
     }
 }
