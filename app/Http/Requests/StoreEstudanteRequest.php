@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Request;
 
 class StoreEstudanteRequest extends FormRequest

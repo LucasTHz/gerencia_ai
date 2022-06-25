@@ -17,12 +17,14 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             return to_route('home')->with(
-                'success', 'Login realizado com sucesso!'
+                'success',
+                'Login realizado com sucesso!'
             );
         }
-        
+
         return redirect('/login')->with(
-            'error', 'Email ou senha inválidos.'
+            'error',
+            'Email ou senha inválidos.'
         );
     }
     /**
@@ -47,7 +49,8 @@ class AuthController extends Controller
         // $request->session()->regenerateToken();
 
         return to_route('home')->with(
-            'success', 'Logout realizado com sucesso!'
+            'success',
+            'Logout realizado com sucesso!'
         );
     }
 }

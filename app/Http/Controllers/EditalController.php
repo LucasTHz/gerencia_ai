@@ -50,7 +50,7 @@ class EditalController extends Controller
     {
         $intituicao = DB::table('Instituicao')->select('id_instituicao')->where('nome', '=', $request->instituicao)->get();
         // Armazeno no servidor o edital e pego caminho do edital para armazenar no banco de dados
-        $path = $request->file('edital')->store('public/editais');
+        $path = $request->file('edital')->store('editais');
 
         Edital::create(array_merge(
             $request->only(

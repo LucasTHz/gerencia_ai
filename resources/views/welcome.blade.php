@@ -26,6 +26,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{$edital->titulo_proposta}}</h5>
                 <p class="card-text">{{$edital->resumo}}</p>
+                <a href="{{ url("storage/$edital->path_edital")}}" class="card-link">Ver edital</a>
             </div>
             <div class="card-footer">
                 <small class="text-muted">Inscrições até {{$edital->termino_inscricao}}</small>

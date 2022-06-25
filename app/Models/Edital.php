@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Database\Factories\EditalFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +9,9 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Edital extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     protected $table = 'Edital';
     public $timestamps = false;
