@@ -7,6 +7,7 @@ use App\Models\Edital;
 use App\Models\Instituicoes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class EditalController extends Controller
 {
@@ -50,7 +51,7 @@ class EditalController extends Controller
     {
         $intituicao = DB::table('Instituicao')->select('id_instituicao')->where('nome', '=', $request->instituicao)->get();
         // Armazeno no servidor o edital e pego caminho do edital para armazenar no banco de dados
-        $path = $request->file('edital')->store('editais');
+        $path = Storage::disk('ftp')->put('', $request->file('edital'));
 
         Edital::create(array_merge(
             $request->only(
