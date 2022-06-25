@@ -23,7 +23,7 @@
             <div class="col-12 col-lg-10">
                 <div class="card-body p-5">
                     <h1 class="mb-5 text-center">Cadastro de edital</h1>
-                    <form action="{{route('edital.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('edital.store')}}" method="POST" enctype="multipart/form-data" style="z-index: 1">
                         @csrf
                         @method('POST')
                         <!-- 2 column grid layout with text inputs for the first and last names -->
