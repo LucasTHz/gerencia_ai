@@ -30,8 +30,8 @@ class VerificaSenha implements Rule
     {
         $user = auth($this->guard)->user();
 
-        $hash = match($this->guard) {
-            'estudante' => DB::table('Estudante')->where('id','=' ,$user->id)->value('password'),
+        $hash = match ($this->guard) {
+            'estudante' => DB::table('Estudante')->where('id', '=', $user->id)->value('password'),
             'professor' => DB::table('Professor')->where('id_professor', '=', $user->id_professor)->value('password'),
         };
 

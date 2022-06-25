@@ -1,13 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\EditalController;
 use App\Http\Controllers\EstudanteController;
 use App\Http\Controllers\InstituicaoController;
 use App\Http\Controllers\ProfessorController;
-use App\Models\Estudante;
-use App\Models\Professores;
 use Illuminate\Support\Facades\Route;
 
 /*

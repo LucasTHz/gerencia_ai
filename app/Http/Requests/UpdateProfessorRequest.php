@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Professores;
 use App\Rules\VerificaSenha;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -32,7 +30,7 @@ class UpdateProfessorRequest extends FormRequest
         return [
             'nome' => 'required|max:255',
             'email' => ['required','email','max:255', Rule::unique('Professor', 'email')->ignore($user->id_professor, 'id_professor')],
-            'atual_password' => [new VerificaSenha],
+            'atual_password' => [new VerificaSenha()],
             // 'nova_senha' => ['min:8','max:16'],
             // 'conf_senha' => 'same:nova_senha',
             'celular' => ['required', Rule::unique('Professor', 'celular')->ignore($user->id_professor, 'id_professor')],

@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class Estudante extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     protected $table = 'Estudante';
     protected $primaryKey = 'id';
@@ -47,5 +48,4 @@ class Estudante extends Authenticatable
     {
         return $this->hasOne(Instituicoes::class, 'id_instituicao', 'id_instituicao');
     }
-
 }

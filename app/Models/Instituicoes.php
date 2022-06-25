@@ -9,7 +9,9 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Instituicoes extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     protected $table = 'Instituicao';
     protected $primaryKey = 'id_instituicao';
@@ -18,7 +20,7 @@ class Instituicoes extends Model
         'nome',
         'sigla',
     ];
-    
+
     protected $fillable = [
         'nome',
         'sigla',

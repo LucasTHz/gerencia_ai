@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Professores;
 use App\Rules\VerificaSenha;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\Cast\Object_;
 
 class ProfessorController extends Controller
 {

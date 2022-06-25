@@ -4,9 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Edital;
 use App\Models\Instituicoes;
-use Database\Factories\EditalFactory;
-use Illuminate\Cache\RedisTaggedCache;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,12 +17,11 @@ class DatabaseSeeder extends Seeder
     {
 //         \App\Models\User::factory(10)->create();
         //  Edital::factory(5)->create();
-         Instituicoes::factory(5)->create();
+        Instituicoes::factory(5)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
     }
 }

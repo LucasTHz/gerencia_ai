@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEstudanteRequest;
 use App\Http\Requests\UpdateEstudanteRequest;
-use App\Models\Edital;
 use App\Models\Estudante;
 use App\Models\Instituicoes;
 use App\Rules\VerificaSenha;
