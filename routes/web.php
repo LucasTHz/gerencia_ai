@@ -5,6 +5,7 @@ use App\Http\Controllers\EditalController;
 use App\Http\Controllers\EstudanteController;
 use App\Http\Controllers\InstituicaoController;
 use App\Http\Controllers\ProfessorController;
+use App\Models\Estudante;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,3 +36,4 @@ Route::post('professor/password/change', [ProfessorController::class, 'changePas
 Route::post('estudante/password/change', [EstudanteController::class, 'changePassword'])->name('estudante.password.change');
 Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout')->middleware('auth');
 
+Route::post('submete/{id}', [EstudanteController::class, 'inscricao'])->name('estudante.inscricao');

@@ -48,4 +48,9 @@ class Estudante extends Authenticatable
     {
         return $this->hasOne(Instituicoes::class, 'id_instituicao', 'id_instituicao');
     }
+
+    public function inscricoes()
+    {
+        return $this->belongsToMany(Edital::class, 'Submete', 'id_Estudante', 'numero_edital');
+    }
 }

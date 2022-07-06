@@ -81,11 +81,9 @@ class Handler extends ExceptionHandler
      *
      * @throws \Exception
      */
-    public function render($request, Throwable $e)
-    {
-        if ($e instanceof HttpException) {
-            return to_route('error')->with('teste','Você não tem permissão para acessar esta página.');
-        }
+    // public function render($request, Throwable $e)
+    // {
+    //     ds($e->getMessage());
 
-    }
+    // }
 }

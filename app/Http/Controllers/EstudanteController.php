@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEstudanteRequest;
 use App\Http\Requests\UpdateEstudanteRequest;
+use App\Models\Edital;
 use App\Models\Estudante;
 use App\Models\Instituicoes;
 use App\Rules\VerificaSenha;
@@ -142,7 +143,6 @@ class EstudanteController extends Controller
     {
         $user = auth('estudante')->user();
 
-
         $request->validate([
             'atual_password' => [new VerificaSenha('estudante'), 'required'],
             'nova_senha' => ['min:8', 'max:16', 'required'],
@@ -161,5 +161,21 @@ class EstudanteController extends Controller
         $request->session()->regenerate();
 
         return back()->with('success', 'Senha atualizada com sucesso!');
+    }
+
+    /**
+     * Realize the inscription of the Estudante in a edital.
+     */
+    public function inscricao($edital)
+    {
+        $edital = DB::table('Edital')->select('*')->where('numero_edital', '=', $edital)->get();
+        $user = auth('estudante')->user();
+        $estudante = Estudante::find($user->id);
+
+        $estudante->inscricoes()->attach((int)($edital[0]->numero_edital));
+
+        return back()->with('success', 'Inscricao realizada com sucesso!');
+
+
     }
 }

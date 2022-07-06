@@ -26,7 +26,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{$edital->titulo_proposta}}</h5>
                 <p class="card-text">{{$edital->resumo}}</p>
-                <a href="{{ asset("editais/$edital->path_edital")}}" class="card-link">Ver edital</a>
+                <a href="{{ route('edital.show', $edital->numero_edital) }}" class="card-link">Ver informações</a>
             </div>
             <div class="card-footer">
                 <small class="text-muted">Inscrições até {{$edital->termino_inscricao}}</small>

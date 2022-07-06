@@ -80,9 +80,10 @@ class EditalController extends Controller
      * @param  \App\Models\Edital  $edital
      * @return \Illuminate\Http\Response
      */
-    public function show(Edital $edital)
+    public function show($edital)
     {
-        //
+        $edital = DB::table('Edital')->select('*')->where('numero_edital', '=', $edital)->get();
+        return view('edital.show', ['edital' => $edital, 'path' => $edital[0]->path_edital]);
     }
 
     /**
