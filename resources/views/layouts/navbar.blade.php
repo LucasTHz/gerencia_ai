@@ -422,7 +422,12 @@
                         </li>
                         @auth('estudante')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('estudante.show', auth('estudante')->user()->id)}}">Perfil</a>
+                            <a class="nav-link"
+                                href="{{route('estudante.inscricoes')}}">Inscricoes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{{route('estudante.show', auth('estudante')->user()->id)}}">Perfil</a>
                         </li>
                         <form action="{{route('auth.logout')}}" name="logout" method="post">
                             @csrf
@@ -437,7 +442,8 @@
                             <a class="nav-link" href="{{ route('edital.create') }}">Cadastrar edital</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('professor.show', auth('professor')->user()->id_professor)}}">Perfil</a>
+                            <a class="nav-link"
+                                href="{{ route('professor.show', auth('professor')->user()->id_professor)}}">Perfil</a>
                         </li>
                         <form action="{{route('auth.logout')}}" name="logout" method="post">
                             @csrf

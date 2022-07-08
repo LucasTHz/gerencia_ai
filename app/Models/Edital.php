@@ -15,6 +15,7 @@ class Edital extends Model
 
     protected $table = 'Edital';
     public $timestamps = false;
+    protected $primaryKey = 'numero_edital';
 
     protected $fillable = [
         'vagas_disponiveis_bolsa',

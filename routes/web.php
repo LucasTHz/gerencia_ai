@@ -37,3 +37,4 @@ Route::post('estudante/password/change', [EstudanteController::class, 'changePas
 Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout')->middleware('auth');
 
 Route::post('submete/{id}', [EstudanteController::class, 'inscricao'])->name('estudante.inscricao');
+Route::get('inscricoes', [EstudanteController::class, 'inscricoes'])->name('estudante.inscricoes');

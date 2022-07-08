@@ -51,6 +51,6 @@ class Estudante extends Authenticatable
 
     public function inscricoes()
     {
-        return $this->belongsToMany(Edital::class, 'Submete', 'id_Estudante', 'numero_edital');
+        return $this->belongsToMany(Edital::class, 'Submete', 'id_Estudante', 'numero_edital')->withPivot('aprovamento');
     }
 }
