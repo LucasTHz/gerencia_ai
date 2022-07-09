@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResultadoEditalRequest;
 use App\Http\Requests\StoreEditalRequest;
 use App\Models\Edital;
 use App\Models\Instituicoes;
@@ -118,5 +119,14 @@ class EditalController extends Controller
     public function destroy(Edital $edital)
     {
         //
+    }
+
+    public function resultado(ResultadoEditalRequest $request)
+    {
+        $path = Storage::disk('ftp')->put('', $request->file('edital'));
+        $edital = Edital::find($request->numero_edital);
+        $edital->path_edital_resultado = $path;
+        $edital->save();
+        return back()->with('success', 'Resultado cadastrado com sucesso!');
     }
 }

@@ -28,7 +28,7 @@ Route::resources([
     'edital' => EditalController::class,
 ]);
 
-Route::controller(AuthController::class)->group(function() {
+Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'login')->name('auth.login');
     Route::post('login', 'authenticate')->name('auth.authenticate');
 });
@@ -38,3 +38,5 @@ Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout')->m
 
 Route::post('submete/{id}', [EstudanteController::class, 'inscricao'])->name('estudante.inscricao');
 Route::get('inscricoes', [EstudanteController::class, 'inscricoes'])->name('estudante.inscricoes');
+Route::view('professor/edital/resultado', 'edital.resultado')->name('professor.edital.resultado');
+Route::post('professor/edital/resultado', [EditalController::class, 'resultado'])->name('professor.cadastra.resultado');
