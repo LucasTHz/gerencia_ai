@@ -175,7 +175,17 @@ class EstudanteController extends Controller
         $estudante->inscricoes()->attach((int)($edital[0]->numero_edital));
 
         return back()->with('success', 'Inscricao realizada com sucesso!');
+    }
 
+    public function inscricoes()
+    {
+        $estudante = auth('estudante')->user()->id;
+        $inscricoes = Estudante::find($estudante)->inscricoes()->get();
 
+        $edital = Edital::find($inscricoes[0]->numero_edital)->get('titulo_proposta');
+
+        return view('estudante.inscricoes', [
+            'inscricoes' => $inscricoes
+        ]);
     }
 }

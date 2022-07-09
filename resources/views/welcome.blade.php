@@ -10,29 +10,41 @@
 </div>
 @endif
 
-@auth('estudante')
-    <div class="row">
-        <div class="col-md-12">
-            {{-- {{dd(auth()->user())}} --}}
-        </div>
-    </div>
-@endauth
-<h1 class="mt-8 text-center mb-4">Notícias</h1>
-
+<h2 class="mt-8 ml-4 mb-2">Ultimos editais publicados</h2>
 <div class="row row-cols-1 row-cols-md-3 g-2 ml-2">
     @foreach($editais as $edital)
     <div class="col">
         <div class="card mt-4 h-100">
             <div class="card-body">
-                <h5 class="card-title">{{$edital->titulo_proposta}}</h5>
-                <p class="card-text">{{$edital->resumo}}</p>
+                <h5 class="card-title">{{ $edital->titulo_proposta }}</h5>
+                <p class="card-text">{{ $edital->resumo }}</p>
                 <a href="{{ route('edital.show', $edital->numero_edital) }}" class="card-link">Ver informações</a>
             </div>
             <div class="card-footer">
-                <small class="text-muted">Inscrições até {{$edital->termino_inscricao}}</small>
+                <small class="text-muted">Inscrições até {{ $edital->termino_inscricao }}</small>
             </div>
         </div>
     </div>
+    @endforeach
+</div>
+
+<h2 class="mt-5 ml-4 mb-2 t-5">Ultimos resultados publicados</h2>
+<div class="row row-cols-1 row-cols-md-3 g-2 ml-2">
+    @foreach($editais as $edital)
+    @if ($edital->path_edital_resultado != NULL)
+    <div class="col">
+        <div class="card mt-4 h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ $edital->titulo_proposta }}</h5>
+                <p class="card-text">{{ $edital->resumo }}</p>
+                <a href="{{ asset("editais/$edital->path_edital_resultado") }}" class="card-link">Ver resultado</a>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Publicacao em: {{ $edital->termino_inscricao }}</small>
+            </div>
+        </div>
+    </div>
+    @endif
     @endforeach
 </div>
 @endsection
