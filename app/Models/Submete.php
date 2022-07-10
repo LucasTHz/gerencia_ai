@@ -21,4 +21,3 @@ class Submete extends Model
         return $this->belongsTo(Estudante::class, 'id_Estudante');
     }
 }
-

@@ -19,7 +19,6 @@ class AuthUsers
         if (auth('estudante')->check() || auth('professor')->check()) {
             return $next($request);
         }
-        abort(403);
-
+        abort(403, 'Você não tem permissão para acessar está página.');
     }
 }
