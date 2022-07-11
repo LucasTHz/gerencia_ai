@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\UnauthorizedException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -66,6 +67,10 @@ class Handler extends ExceptionHandler
                     "msg" => "Recurso não encontrado"
                 ], 404);
             }
+        });
+
+        $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
+            return abort(403, 'Você não tem permissão para acessar está página.');
         });
     }
 

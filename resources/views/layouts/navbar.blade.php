@@ -428,7 +428,8 @@
                             <a class="nav-link"
                                 href="{{route('estudante.show', auth('estudante')->user()->id)}}">Perfil</a>
                         </li>
-                        <form action="{{route('auth.logout')}}" name="logout" method="post">
+                        <form action="{{route('auth.logout')}}" name="logout" method="get">
+                            @method('GET')
                             @csrf
                             <li class="nav-item">
                                 <a class="nav-link" href='javascript:logout.submit()'>Logout</a>
@@ -463,8 +464,9 @@
                     <a class="nav-link"
                         href="{{ route('professor.show', auth('professor')->user()->id_professor)}}">Perfil</a>
                 </li>
-                <form action="{{route('auth.logout')}}" name="logout" method="post">
+                <form action="{{route('auth.logout')}}" name="logout" method="get">
                     @csrf
+                    @method('GET')
                     <li class="nav-item">
                         <a class="nav-link" href='javascript:logout.submit()'>Logout</a>
                     </li>
