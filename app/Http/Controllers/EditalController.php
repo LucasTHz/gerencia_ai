@@ -29,7 +29,7 @@ class EditalController extends Controller
      */
     public function resumo()
     {
-        return view('welcome', ['editais' => Edital::paginate(6)]);
+        return view('welcome', ['editais' => 'asd']);
     }
 
     /**
